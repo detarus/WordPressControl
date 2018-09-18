@@ -1,4 +1,4 @@
-#Hi, this is a WordPress Desktop client
+# Hi, this is a WordPress Desktop client
 
 ## It is a Visual Studio course project made by me long time ago in a college.
 
