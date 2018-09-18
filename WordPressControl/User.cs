@@ -19,12 +19,43 @@ namespace WordPressControl
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.OpenForms.OfType<Menu>().FirstOrDefault().Con.NotQuery("INSERT INTO wp_users (`user_login`, `user_nicename`, `user_email`, `user_pass`) VALUES('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "')");
-            Application.OpenForms.OfType<Menu>().FirstOrDefault().ListUsers();
+            Application.OpenForms.OfType<Menu>().FirstOrDefault().Con.NotQuery("INSERT INTO wp_users (`user_login`,  `user_pass`) VALUES('" + textBox1.Text + "','" + textBox2.Text+"')");
             Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        public void ListUsers()
+        {
+     
+            var List = Application.OpenForms.OfType<Menu>().FirstOrDefault().Con.Query("SELECT user_login, user_pass FROM wp_users");
+            dataGridView1.RowCount = List.Length;
+            for (int i = 0; i < List.Length; i++)
+            {
+                try
+                {
+                    dataGridView1[0, i].Value = List[i].ItemArray[0];
+                    dataGridView1[1, i].Value = List[i].ItemArray[1];
+                    
+
+                }
+                catch { }
+            }
+        }
+        private void User_Load(object sender, EventArgs e)
+        {
+            ListUsers();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.OpenForms.OfType<Menu>().FirstOrDefault().Con.NotQuery("INSERT INTO wp_users (`user_login`,  `user_pass`) VALUES('" + textBox1.Text + "','" + textBox2.Text + "')");
+            ListUsers();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             Close();
         }

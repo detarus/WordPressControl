@@ -72,65 +72,19 @@ namespace WordPressControl
                 return;
             }
         }
-        public void ListPosts()
-        {
-            dataGridView1.Columns[0].Visible = true;
-            dataGridView1.Columns[1].Visible = true;
-            dataGridView1.Columns[2].Visible = true;
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            var List = Con.Query("SELECT post_author, post_title, post_content,post_name  FROM wp_posts");
-            dataGridView1.RowCount = List.Length;
-            for (int i = 0; i < List.Length; i++)
-            {
-                var List1 = Con.Query("SELECT user_nicename FROM wp_users WHERE ID=" + List[i].ItemArray[0]);
-                try
-                {
-                    dataGridView1[0, i].Value = List1[0].ItemArray[0].ToString();
-                    dataGridView1[1, i].Value = List[i].ItemArray[1];
-                    dataGridView1[2, i].Value = List[i].ItemArray[2];
-                }
-                catch { }
-            }
-        }
-        public void ListUsers()
-        {
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = true;
-            dataGridView1.Columns[5].Visible = true;
-            dataGridView1.Columns[6].Visible = true;
-            var List = Con.Query("SELECT user_nicename, user_login, user_email FROM wp_users");
-            dataGridView1.RowCount = List.Length;
-            for (int i = 0; i < List.Length; i++)
-            {
-                 try
-                {
-                    dataGridView1[4, i].Value = List[0].ItemArray[0];
-                    dataGridView1[5, i].Value = List[i].ItemArray[1];
-                    dataGridView1[6, i].Value = List[i].ItemArray[2];
-
-                }
-                catch { }
-            }
-        }
+      
+        
         private void Menu_Load(object sender, EventArgs e)
         {
-            ListPosts();
+            Login Log = new Login();
+            Log.ShowDialog();
+           
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            ListPosts();
-        }
-
+        
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            ListUsers();
+          
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -143,6 +97,23 @@ namespace WordPressControl
         {
             Post Pos = new WordPressControl.Post();
             Pos.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Post Pos = new WordPressControl.Post();
+            Pos.ShowDialog();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            User Use = new WordPressControl.User();
+            Use.ShowDialog();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
